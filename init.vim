@@ -7,6 +7,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'dense-analysis/ale'
+Plug 'airblade/vim-gitgutter'
 " Plug 'vim-syntastic/syntastic'
 " Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 " Plug 'tmux-plugins/vim-tmux'
