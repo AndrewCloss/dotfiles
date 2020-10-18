@@ -22,33 +22,6 @@ Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
-" #################### README ####################
-
-" Installation
-
-" External programs
-" sudo apt install tmux
-" https://github.com/powerline/fonts
-" sudo apt-get install fonts-powerline
-
-" Symbolic links
-
-" init.vim      => ~/.config/nvim/init.vim  (vim config)
-" .eslintrc.js  => project_dir              (to lint Vue.js and JS)
-" .tmux.conf    => ~/                       (tmux config)
-
-" Synchronize clipboard in WSL with win32yank.exe
-
-" curl -sLo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
-" sudo apt install unzip
-" unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
-" chmod +x /tmp/win32yank.exe
-" sudo mv /tmp/win32yank.exe /usr/local/bin/
-
-" Potential plugins
-
-" https://github.com/prettier/vim-prettier
-
 " #################### General ####################
 
 set relativenumber
@@ -96,6 +69,14 @@ let g:airline_detect_spell=0
 let g:airline_extensions = []
 let g:airline_powerline_fonts = 1
 
+" #################### VimWiki ####################
+
+set nocompatible
+filetype plugin on
+syntax on
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
 " #################### NERDTree ####################
 
 " open NERDTree on startup if no files were specified
@@ -115,6 +96,8 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " #################### NERDCommenter ####################
 
 :map <C-c> <plug>NERDCommenterToggle
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
 
 " #################### Fuzzy Finder ####################
 
@@ -149,8 +132,9 @@ nmap <silent> <c-l> :wincmd l<CR>
 noremap x "_x
 noremap X "_X
 
-" Rebind save to ctrl-s, allow saving in insert
-nnoremap <C-S> :update<cr>
+" Rebind save to ctrl-s, allow saving in insert and visual
+noremap <C-S> :update<cr>
+vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <Esc>:update<cr>gi
 
 " WSL yank support
