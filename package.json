@@ -21,7 +21,5 @@
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-vue": "^7.0.1"
   },
-  "dependencies": {
-    "php": "^1.0.1"
-  }
+  "dependencies": {}
 }
