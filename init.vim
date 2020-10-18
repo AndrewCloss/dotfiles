@@ -17,6 +17,9 @@ Plug 'tpope/vim-dispatch'             "| Optional
 Plug 'tpope/vim-projectionist'        "|
 Plug 'noahfrederick/vim-composer'     "|
 Plug 'noahfrederick/vim-laravel'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
 
 call plug#end()
 
@@ -85,7 +88,14 @@ set background=dark
 let g:gruvbox_italic=1
 set termguicolors
 autocmd vimenter * colorscheme gruvbox
+let g:airline_theme = 'bubblegum'
 
+let g:airline#extensions#disable_rtp_load = 1
+
+let g:airline_detect_spelllang=0
+let g:airline_detect_spell=0
+let g:airline_extensions = ['tmuxline']
+let g:airline_powerline_fonts = 1
 " #################### NERDTree ####################
 
 " open NERDTree on startup if no files were specified
@@ -104,7 +114,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " #################### NERDCommenter ####################
 
-:map <C-a> <plug>NERDCommenterToggle
+:map <C-c> <plug>NERDCommenterToggle
 
 " #################### Fuzzy Finder ####################
 
@@ -119,12 +129,12 @@ let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit'
       \ }
-augroup fzf
-	  autocmd!
-	    autocmd! FileType fzf
-	      autocmd  FileType fzf set laststatus=0 noshowmode noruler
-	          \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-      augroup END
+"augroup fzf
+		"autocmd!
+			"autocmd! FileType fzf
+				"autocmd  FileType fzf set laststatus=0 noshowmode noruler
+						"\| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+      "augroup END
 
 " #################### Miscellaneous mapping ####################
 
@@ -293,7 +303,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
