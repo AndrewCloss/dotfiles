@@ -6,11 +6,9 @@ Plug 'preservim/nerdcommenter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'yuttie/comfortable-motion.vim'
-"Plug 'dense-analysis/ale'
 Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jwalton512/vim-blade'
-" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 " Plug 'tmux-plugins/vim-tmux'
 " Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-dispatch'             "| Optional
@@ -20,6 +18,7 @@ Plug 'noahfrederick/vim-laravel'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -89,14 +88,14 @@ set background=dark
 let g:gruvbox_italic=1
 set termguicolors
 autocmd vimenter * colorscheme gruvbox
-let g:airline_theme = 'badwolf'
 
+let g:airline_theme = 'badwolf'
 let g:airline#extensions#disable_rtp_load = 1
 let g:airline_detect_spelllang=0
 let g:airline_detect_spell=0
 let g:airline_extensions = []
 let g:airline_powerline_fonts = 1
-"
+
 " #################### NERDTree ####################
 
 " open NERDTree on startup if no files were specified
@@ -119,13 +118,13 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " #################### Fuzzy Finder ####################
 
-"nnoremap <c-p> :Files<cr>
 nnoremap <c-p> :GFiles<cr>
+"nnoremap <c-p> :Files<cr>
 " nmap <silent> sf :FzfFiles<cr>
 
 " Always enable preview window on the right with 60% width
 let g:fzf_preview_window = 'right:60%'
-" let g:fzf_layout = { 'down': '~40%' }
+"let g:fzf_layout = { 'down': '~40%' }
 
 let g:fzf_action = {
       \ 'ctrl-s': 'split',
@@ -151,6 +150,7 @@ noremap x "_x
 noremap X "_X
 
 " Rebind save to ctrl-s, allow saving in insert
+nnoremap <C-S> :update<cr>
 inoremap <C-S> <Esc>:update<cr>gi
 
 " WSL yank support
@@ -163,7 +163,6 @@ inoremap <C-S> <Esc>:update<cr>gi
                         "end
                        
 " #################### Smooth scroll ####################
-
 
 " #################### COC ####################
 
