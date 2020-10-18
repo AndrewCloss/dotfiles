@@ -26,12 +26,20 @@ call plug#end()
 " #################### README ####################
 
 " Installation
-" sudo apt install fzf
+
+" External programs
 " sudo apt install tmux
- 
-" .eslintrc.js => to lint Vue.js and JS
-"
+" https://github.com/powerline/fonts
+" sudo apt-get install fonts-powerline
+
+" Symbolic links
+
+" init.vim      => ~/.config/nvim/init.vim  (vim config)
+" .eslintrc.js  => project_dir              (to lint Vue.js and JS)
+" .tmux.conf    => ~/                       (tmux config)
+
 " Synchronize clipboard in WSL with win32yank.exe
+
 " curl -sLo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
 " sudo apt install unzip
 " unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
@@ -39,6 +47,7 @@ call plug#end()
 " sudo mv /tmp/win32yank.exe /usr/local/bin/
 
 " Potential plugins
+
 " https://github.com/prettier/vim-prettier
 
 " #################### General ####################
@@ -70,14 +79,6 @@ set ignorecase " ignore case of letters
 set smartcase  " override the 'ignorecase' when there is uppercase letters
 set gdefault   " when on, the :substitute flag 'g' is default on
 " ====================================================================
-"set termguicolors
-"let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-" Change cursor shape based on mode
-"let &t_SI = "\<Esc>[6 q"
-"let &t_SR = "\<Esc>[4 q"
-"let &t_EI = "\<Esc>[2 q"
-" ====================================================================
 " https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl
 " https://stackoverflow.com/questions/44480829/how-to-copy-to-clipboard-in-vim-of-bash-on-windows/61864749#61864749
 set clipboard=unnamedplus " use with neovim to sync system clipboard
@@ -88,14 +89,14 @@ set background=dark
 let g:gruvbox_italic=1
 set termguicolors
 autocmd vimenter * colorscheme gruvbox
-let g:airline_theme = 'bubblegum'
+let g:airline_theme = 'badwolf'
 
 let g:airline#extensions#disable_rtp_load = 1
-
 let g:airline_detect_spelllang=0
 let g:airline_detect_spell=0
-let g:airline_extensions = ['tmuxline']
+let g:airline_extensions = ['']
 let g:airline_powerline_fonts = 1
+"
 " #################### NERDTree ####################
 
 " open NERDTree on startup if no files were specified
@@ -118,7 +119,8 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " #################### Fuzzy Finder ####################
 
-nnoremap <c-p> :Files<cr>
+"nnoremap <c-p> :Files<cr>
+nnoremap <c-p> :GFiles<cr>
 " nmap <silent> sf :FzfFiles<cr>
 
 " Always enable preview window on the right with 60% width
