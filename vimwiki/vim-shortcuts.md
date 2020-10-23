@@ -17,8 +17,15 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 ctrl - s - save
-ctrl - p fuzzy finder
-ctrl - c - comment toggle
-ctrl - a - tmux prefix
-  a) c - a new window
-  b) # - go to window
+  
+  
+  
+
+| shortcut | additional | meaning                        |
+|----------|------------|--------------------------------|
+| ctrl - p |            | open fuzzy finder (gitignored) |
+| ctrl - c |            | toggle comment                 |
+| ctrl - a |            | tmux prefix                    |
+| \/       | c          | new tmux window                |
+| \/       | #          | switch to tmux window          |
+|          |            |                                |
