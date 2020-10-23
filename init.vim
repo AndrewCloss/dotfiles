@@ -1,6 +1,7 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 Plug 'morhetz/gruvbox'
+Plug 'crusoexia/vim-monokai'
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -9,16 +10,21 @@ Plug 'yuttie/comfortable-motion.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jwalton512/vim-blade'
-" Plug 'tmux-plugins/vim-tmux'
-" Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-dispatch'             "| Optional
 Plug 'tpope/vim-projectionist'        "|
 Plug 'noahfrederick/vim-composer'     "|
 Plug 'noahfrederick/vim-laravel'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'edkolev/tmuxline.vim'
+" Plug 'edkolev/tmuxline.vim'
 Plug 'vimwiki/vimwiki'
+" Plug 'tmux-plugins/vim-tmux'
+" Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-dispatch'             "| Optional
+" Plug 'narajaon/onestatus'
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'storyn26383/vim-vue'
 
 call plug#end()
 
@@ -59,24 +65,41 @@ set clipboard=unnamedplus " use with neovim to sync system clipboard
 
 set background=dark
 let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark='hard'
 set termguicolors
-autocmd vimenter * colorscheme gruvbox
+" autocmd vimenter * colorscheme gruvbox
+colorscheme gruvbox
+" syntax on
+" colorscheme monokai
 
-let g:airline_theme = 'badwolf'
-let g:airline#extensions#disable_rtp_load = 1
+let g:airline_theme = 'murmur'
+" let g:airline#extensions#disable_rtp_load = 1
 let g:airline_detect_spelllang=0
 let g:airline_detect_spell=0
-let g:airline_extensions = []
+let g:airline_extensions = ['coc', 'fugitiveline', 'branch', 'term']
 let g:airline_powerline_fonts = 1
+" let g:airline_section_z = '%p%% %#__accent_bold#%{g:airline_symbols.linenr}%l%#__restore__#%#__accent_bold#/%L%{g:airline_symbols.maxlinenr}%#__restore__#:%v'
+" let g:airline_section_z = airline#section#create(['linenr'])
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 
+" let g:airline#extensions#tabline#left_sep = ''
+" let g:airline#extensions#tabline#left_alt_sep = ''
+" let g:airline#extensions#tabline#right_sep = ''
+" let g:airline#extensions#tabline#right_alt_sep = '|'
+" au ColorScheme * hi Normal ctermbg=none guibg=none
+" au ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
+" highlight Normal     ctermbg=NONE guibg=NONE
+" highlight LineNr     ctermbg=NONE guibg=NONE
+" highlight SignColumn ctermbg=NONE guibg=NONE
 " #################### VimWiki ####################
 
-set nocompatible
+" set nocompatible
 filetype plugin on
 syntax on
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
+hi Normal guibg=NONE ctermbg=NONE
 " #################### NERDTree ####################
 
 " open NERDTree on startup if no files were specified
@@ -101,13 +124,12 @@ let g:NERDSpaceDelims = 1
 
 " #################### Fuzzy Finder ####################
 
+" use .gitignore
 nnoremap <c-p> :GFiles<cr>
-"nnoremap <c-p> :Files<cr>
-" nmap <silent> sf :FzfFiles<cr>
+" nnoremap <c-p> :Files<cr>
 
-" Always enable preview window on the right with 60% width
-let g:fzf_preview_window = 'right:60%'
-"let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_preview_window = 'right:60%' " enable preview window on the right with 60% width
+let g:fzf_layout = { 'down': '~40%' } " display from bottom
 
 let g:fzf_action = {
       \ 'ctrl-s': 'split',
@@ -145,7 +167,20 @@ inoremap <C-S> <Esc>:update<cr>gi
                     "autocmd TextYankPost * call system(s:clip, join(v:event.regcontents, "\<CR>"))
                         "augroup END
                         "end
-                       
+" if has('wsl')
+  " let g:clipboard = {
+            " \   'name': 'wslclipboard',
+            " \   'copy': {
+            " \      '+': '/usr/local/bin/win32yank.exe -i --crlf',
+            " \      '*': '/usr/local/bin/win32yank.exe -i --crlf',
+            " \    },
+            " \   'paste': {
+            " \      '+': '/usr/local/bin/win32yank.exe -o --lf',
+            " \      '*': '/usr/local/bin/win32yank.exe -o --lf',
+            " \   },
+            " \   'cache_enabled': 1,
+            " \ }
+" endif
 " #################### Smooth scroll ####################
 
 " #################### COC ####################
@@ -319,3 +354,23 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
  "let g:ale_linter_aliases = {'vue': ['vue', 'javascript']}
  "let g:ale_linters = {'vue': ['eslint', 'vls']}
 
+ 
+
+" function! ClipboardYank()
+    " call system('xclip -i -selection clipboard', @@)
+  " endfunction
+  " function! ClipboardPaste()
+      " let @@ = system('xclip -o -selection clipboard')
+    " endfunction
+
+    " vnoremap <silent> y y:call ClipboardYank()<cr>
+    " vnoremap <silent> d d:call ClipboardYank()<cr>
+    " nnoremap <silent> p :call ClipboardPaste()<cr>p
+    
+" if !empty($TMUX)
+    " au BufEnter * :OneStatus
+    set noshowmode noruler
+    set laststatus=0
+" endif
+set cmdheight=1
+" autocmd BufRead,BufNewFile *.vue setfiletype html
