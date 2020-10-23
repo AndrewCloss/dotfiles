@@ -1,81 +1,91 @@
+" Plugins
+" =============================================================================
+
 call plug#begin('~/.config/nvim/plugged')
 
+" themes
 Plug 'morhetz/gruvbox'
 Plug 'crusoexia/vim-monokai'
-Plug 'preservim/nerdtree'
-Plug 'preservim/nerdcommenter'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'yuttie/comfortable-motion.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'jwalton512/vim-blade'
-Plug 'tpope/vim-projectionist'        "|
-Plug 'noahfrederick/vim-composer'     "|
-Plug 'noahfrederick/vim-laravel'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'edkolev/tmuxline.vim'
-Plug 'vimwiki/vimwiki'
-" Plug 'tmux-plugins/vim-tmux'
-" Plug 'christoomey/vim-tmux-navigator'
+" navigation
+Plug 'preservim/nerdtree'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+" autocomplete, linting
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" git
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-dispatch'             "| Optional
-" Plug 'narajaon/onestatus'
+Plug 'vimwiki/vimwiki'
+Plug 'tpope/vim-dispatch'             
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/ReplaceWithRegister'
+" languages
 Plug 'storyn26383/vim-vue'
+Plug 'noahfrederick/vim-composer'     
+Plug 'noahfrederick/vim-laravel'
+Plug 'jwalton512/vim-blade'
+" other
+Plug 'preservim/nerdcommenter'
+Plug 'yuttie/comfortable-motion.vim'
+Plug 'tpope/vim-projectionist'        
+" Plug 'tmux-plugins/vim-tmux'
+" Plug 'christoomey/vim-tmux-navigator'
+" Plug 'edkolev/tmuxline.vim'
+" Plug 'narajaon/onestatus'
 
 call plug#end()
 
-" #################### General ####################
+" General
+" =============================================================================
 
 set relativenumber
-set scrolloff=999       " always keep cursor at the middle of screen
-set virtualedit=onemore " allow the cursor to move just past the end of the line
-set undolevels=5000     " set maximum undo levels
-set undofile            " preserves undo history per file, through closing and opening
-set spell               " spell checking
-set foldmethod=manual       " use manual folding
-set diffopt=filler,vertical " default behavior for diff
-"set nowrap        " disable wrap for long lines
-"set textwidth=0   " disable auto break long lines
-set hlsearch incsearch " turns on highlighting search results and searching as you type.
-"set lazyredraw " performance?
-set linebreak showbreak=↪\  " all of this just tweaks how lines are shown when they wrap.
-"set linebreak showbreak=↪\ breakindent breakindentopt=shift:-2 " all of this just tweaks how lines are shown when they wrap.
+set scrolloff=999               " always keep cursor at the middle of screen
+set virtualedit=onemore         " allow the cursor to move just past the end of the line
+set undolevels=5000             " set maximum undo levels
+set undofile                    " preserves undo history per file, through closing and opening
+" set spell                     " spell checking
+set foldmethod=manual           " use manual folding
+set diffopt=filler,vertical     " default behavior for diff
+"set nowrap                     " disable wrap for long lines
+"set textwidth=0                " disable auto break long lines
+set hlsearch incsearch          " turns on highlighting search results and searching as you type.
+set linebreak showbreak=⏎\      " all of this just tweaks how lines are shown when they wrap.
 set formatoptions+=nj
-let g:PHP_outdentphpescape = 0 " means that PHP tags will match the indent of the HTML around them
-" ====================================================================
+let g:PHP_outdentphpescape = 0  " means that PHP tags will match the indent of the HTML around them
+" tabs
 set expandtab     " replace <Tab with spaces
 set tabstop=2     " number of spaces that a <Tab> in the file counts for
 set softtabstop=2 " remove <Tab> symbols as it was spaces
 set shiftwidth=2  " indent size for << and >>
 set shiftround    " round indent to multiple of 'shiftwidth' (for << and >>)
-" ====================================================================
+" search
 set ignorecase " ignore case of letters
 set smartcase  " override the 'ignorecase' when there is uppercase letters
 set gdefault   " when on, the :substitute flag 'g' is default on
-" ====================================================================
+" clipboard
+set clipboard=unnamedplus " use with neovim to sync system clipboard
 " https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl
 " https://stackoverflow.com/questions/44480829/how-to-copy-to-clipboard-in-vim-of-bash-on-windows/61864749#61864749
-set clipboard=unnamedplus " use with neovim to sync system clipboard
 
-" #################### Theme ####################
+" Theme
+" =============================================================================
 
-set background=dark
-let g:gruvbox_italic=1
-let g:gruvbox_contrast_dark='hard'
-set termguicolors
-" autocmd vimenter * colorscheme gruvbox
 colorscheme gruvbox
-" syntax on
 " colorscheme monokai
 
+let g:gruvbox_italic=1              " italics are disabled by default
+let g:gruvbox_contrast_dark='hard'  " high contrast version of dark theme
+set termguicolors                   " 24-bit colors
+" set background=dark
+" autocmd vimenter * colorscheme gruvbox
+" syntax on
+
+" status bar
 let g:airline_theme = 'murmur'
-" let g:airline#extensions#disable_rtp_load = 1
-let g:airline_detect_spelllang=0
-let g:airline_detect_spell=0
+" let g:airline_detect_spelllang=0
+" let g:airline_detect_spell=0
 let g:airline_extensions = ['coc', 'fugitiveline', 'branch', 'term']
 let g:airline_powerline_fonts = 1
 " let g:airline_section_z = '%p%% %#__accent_bold#%{g:airline_symbols.linenr}%l%#__restore__#%#__accent_bold#/%L%{g:airline_symbols.maxlinenr}%#__restore__#:%v'
@@ -91,7 +101,9 @@ let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 " highlight Normal     ctermbg=NONE guibg=NONE
 " highlight LineNr     ctermbg=NONE guibg=NONE
 " highlight SignColumn ctermbg=NONE guibg=NONE
-" #################### VimWiki ####################
+
+" VimWiki
+" =============================================================================
 
 " set nocompatible
 filetype plugin on
@@ -100,21 +112,23 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
 hi Normal guibg=NONE ctermbg=NONE
-" #################### NERDTree ####################
 
-" open NERDTree on startup if no files were specified
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" open NERDTree on startup if a directory was specified
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+" NERDTree
+" =============================================================================
 
 " map to open NERDTree with a specific key
 map <C-n> :NERDTreeToggle<CR>
 
 " close vim if only NERDTree is left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" open NERDTree on startup if no files were specified
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" open NERDTree on startup if a directory was specified
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 " #################### NERDCommenter ####################
 
@@ -135,12 +149,6 @@ let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit'
       \ }
-"augroup fzf
-		"autocmd!
-			"autocmd! FileType fzf
-				"autocmd  FileType fzf set laststatus=0 noshowmode noruler
-						"\| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-      "augroup END
 
 " #################### Miscellaneous mapping ####################
 
@@ -181,7 +189,6 @@ inoremap <C-S> <Esc>:update<cr>gi
             " \   'cache_enabled': 1,
             " \ }
 " endif
-" #################### Smooth scroll ####################
 
 " #################### COC ####################
 
@@ -193,7 +200,7 @@ set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
-set cmdheight=2
+" set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -342,19 +349,6 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
-" #################### ALE ####################
-
-" In ~/.vim/vimrc, or somewhere similar.
-"let g:ale_fixers = {
-"\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-"\   'javascript': ['eslint'],
-"\}
- ""In ~/.vim/vimrc, or somewhere similar.
- "let g:ale_linter_aliases = {'vue': ['vue', 'javascript']}
- "let g:ale_linters = {'vue': ['eslint', 'vls']}
-
- 
 
 " function! ClipboardYank()
     " call system('xclip -i -selection clipboard', @@)
