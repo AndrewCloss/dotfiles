@@ -6,6 +6,7 @@ call plug#begin('~/.config/nvim/plugged')
 " themes
 Plug 'morhetz/gruvbox'
 Plug 'crusoexia/vim-monokai'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " navigation
@@ -15,12 +16,10 @@ Plug 'junegunn/fzf.vim'
 " autocomplete, linting
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " git
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-dispatch'             
-Plug 'tpope/vim-surround'
-Plug 'vim-scripts/ReplaceWithRegister'
 " languages
 Plug 'storyn26383/vim-vue'
 Plug 'noahfrederick/vim-composer'     
@@ -30,6 +29,8 @@ Plug 'jwalton512/vim-blade'
 Plug 'preservim/nerdcommenter'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'tpope/vim-projectionist'        
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'tpope/vim-surround'
 " Plug 'tmux-plugins/vim-tmux'
 " Plug 'christoomey/vim-tmux-navigator'
 " Plug 'edkolev/tmuxline.vim'
@@ -41,12 +42,12 @@ call plug#end()
 " =============================================================================
 
 set relativenumber
+set nu rnu                      " hybrid line numbers
 set scrolloff=999               " always keep cursor at the middle of screen
 set virtualedit=onemore         " allow the cursor to move just past the end of the line
 set undolevels=5000             " set maximum undo levels
 set undofile                    " preserves undo history per file, through closing and opening
 " set spell                     " spell checking
-set foldmethod=manual           " use manual folding
 set diffopt=filler,vertical     " default behavior for diff
 "set nowrap                     " disable wrap for long lines
 "set textwidth=0                " disable auto break long lines
@@ -66,14 +67,18 @@ set smartcase  " override the 'ignorecase' when there is uppercase letters
 set gdefault   " when on, the :substitute flag 'g' is default on
 " clipboard
 set clipboard=unnamedplus " use with neovim to sync system clipboard
-" https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl
-" https://stackoverflow.com/questions/44480829/how-to-copy-to-clipboard-in-vim-of-bash-on-windows/61864749#61864749
+" fold manually by indent level
+set foldmethod=indent   
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
 
 " Theme
 " =============================================================================
 
-colorscheme gruvbox
-" colorscheme monokai
+" colorscheme gruvbox
+colorscheme monokai
+" colorscheme dracula
 
 let g:gruvbox_italic=1              " italics are disabled by default
 let g:gruvbox_contrast_dark='hard'  " high contrast version of dark theme
@@ -93,7 +98,7 @@ let g:airline_powerline_fonts = 1
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 
 " let g:airline#extensions#tabline#left_sep = ''
-" let g:airline#extensions#tabline#left_alt_sep = ''
+
 " let g:airline#extensions#tabline#right_sep = ''
 " let g:airline#extensions#tabline#right_alt_sep = '|'
 " au ColorScheme * hi Normal ctermbg=none guibg=none
@@ -108,7 +113,7 @@ let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 " set nocompatible
 filetype plugin on
 syntax on
-let g:vimwiki_list = [{'path': '~/vimwiki/',
+" let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
 hi Normal guibg=NONE ctermbg=NONE
@@ -166,29 +171,6 @@ noremap X "_X
 noremap <C-S> :update<cr>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <Esc>:update<cr>gi
-
-" WSL yank support
-"let s:clip = '/mnt/c/Windows/System32/clip.exe'  " default location
-"if executable(s:clip)
-    "augroup WSLYank
-            "autocmd!
-                    "autocmd TextYankPost * call system(s:clip, join(v:event.regcontents, "\<CR>"))
-                        "augroup END
-                        "end
-" if has('wsl')
-  " let g:clipboard = {
-            " \   'name': 'wslclipboard',
-            " \   'copy': {
-            " \      '+': '/usr/local/bin/win32yank.exe -i --crlf',
-            " \      '*': '/usr/local/bin/win32yank.exe -i --crlf',
-            " \    },
-            " \   'paste': {
-            " \      '+': '/usr/local/bin/win32yank.exe -o --lf',
-            " \      '*': '/usr/local/bin/win32yank.exe -o --lf',
-            " \   },
-            " \   'cache_enabled': 1,
-            " \ }
-" endif
 
 " #################### COC ####################
 
@@ -350,17 +332,6 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-" function! ClipboardYank()
-    " call system('xclip -i -selection clipboard', @@)
-  " endfunction
-  " function! ClipboardPaste()
-      " let @@ = system('xclip -o -selection clipboard')
-    " endfunction
-
-    " vnoremap <silent> y y:call ClipboardYank()<cr>
-    " vnoremap <silent> d d:call ClipboardYank()<cr>
-    " nnoremap <silent> p :call ClipboardPaste()<cr>p
-    
 " if !empty($TMUX)
     " au BufEnter * :OneStatus
     set noshowmode noruler
