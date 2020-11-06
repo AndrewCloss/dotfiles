@@ -6,6 +6,7 @@ call plug#begin('~/.config/nvim/plugged')
 " themes
 Plug 'morhetz/gruvbox'
 Plug 'crusoexia/vim-monokai'
+Plug 'jsit/toast.vim/'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -76,8 +77,9 @@ set foldlevel=2
 " Theme
 " =============================================================================
 
-" colorscheme gruvbox
-colorscheme monokai
+colorscheme gruvbox
+" colorscheme toast
+" colorscheme monokai
 " colorscheme dracula
 
 let g:gruvbox_italic=1              " italics are disabled by default

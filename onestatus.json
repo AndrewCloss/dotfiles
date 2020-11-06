@@ -6,9 +6,11 @@
     { "fg": "#fcfcfc", "bg": "#218380", "labelFunc": "s:getHead" }
   ],
   "status-left": [
-    { "fg": "default", "bg": "default", "labelFunc": "s:getFileName" }
+    { "fg": "default", "bg": "default" }
   ],
-  "status-style": "s:getDefaultColor",
+  "status-style": [
+    { "fg": "default", "bg": "default" }
+  ],
   "window-status-style": [
     { "fg": "#6c757d", "bg": "default", "isStyleOnly": true }
   ],
