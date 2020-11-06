@@ -21,6 +21,12 @@
 4. powerline-shell
   - ln config.json ~/.config/powerline-shell/config.json
   
+= Language servers =
+- 
+- :CocInstall coc-phpls
+- :CocInstall coc-tsserver
+
+
 = Synchronize clipboard in WSL with win32yank.exe =
 
 curl -sLo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
