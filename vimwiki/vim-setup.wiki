@@ -77,3 +77,22 @@ https://github.com/prettier/vim-prettier
     " vnoremap <silent> y y:call ClipboardYank()<cr>
     " vnoremap <silent> d d:call ClipboardYank()<cr>
     " nnoremap <silent> p :call ClipboardPaste()<cr>p
+  
+  
+== Bashrc ==
+
+
+# powerline-shell
+function _update_ps1() {
+    PS1=$(powerline-shell $?)
+  }
+
+if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+      PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+
+# export TERM=screen-256color-bce
+# export TERM=screen-256color
+
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
+# export FZF_DEFAULT_COMMAND='rg --hidden --follow'

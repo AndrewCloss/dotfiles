@@ -4,7 +4,12 @@ gt            go to next tab
 gT            go to previous tab
 {i}gt         go to tab in position i
 
-
+== To resize tmux windows ==
+Assuming your prefix key is Ctrl-B (Cmd-B on Mac):
+    Press Ctrl-B and release
+    Press and hold Meta (Option on Mac)
+    While holding Meta press arrow keys repeatedly to resize current pane
+    
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)

@@ -85,7 +85,7 @@ colorscheme gruvbox
 " colorscheme dracula
 
 let g:gruvbox_italic=1              " italics are disabled by default
-let g:gruvbox_contrast_dark='hard'  " high contrast version of dark theme
+" let g:gruvbox_contrast_dark='hard'  " high contrast version of dark theme
 set termguicolors                   " 24-bit colors
 " set background=dark
 " autocmd vimenter * colorscheme gruvbox
@@ -148,8 +148,8 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " #################### Fuzzy Finder ####################
 
 " use .gitignore
-nnoremap <c-p> :GFiles<cr>
-" nnoremap <c-p> :Files<cr>
+" nnoremap <c-p> :GFiles<cr>
+nnoremap <c-p> :Files<cr>
 
 let g:fzf_preview_window = 'right:60%' " enable preview window on the right with 60% width
 let g:fzf_layout = { 'down': '~40%' } " display from bottom
@@ -347,3 +347,6 @@ set cmdheight=1
 "
 
 nmap <F8> :TagbarToggle<CR>
+
+
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
