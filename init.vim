@@ -75,7 +75,7 @@ set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
-
+set ttimeoutlen=10
 " Theme
 " =============================================================================
 
@@ -92,6 +92,7 @@ set termguicolors                   " 24-bit colors
 " syntax on
 
 " status bar
+" let g:airline_theme = 'powerlineish'
 let g:airline_theme = 'murmur'
 " let g:airline_detect_spelllang=0
 " let g:airline_detect_spell=0
