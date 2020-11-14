@@ -27,15 +27,17 @@ Plug 'noahfrederick/vim-composer'
 Plug 'noahfrederick/vim-laravel'
 Plug 'jwalton512/vim-blade'
 " other
-Plug 'preservim/nerdcommenter'
+" Plug 'preservim/nerdcommenter'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'tpope/vim-projectionist'        
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'tpope/vim-surround'
 " Plug 'tmux-plugins/vim-tmux'
-" Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 " Plug 'edkolev/tmuxline.vim'
 " Plug 'narajaon/onestatus'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
@@ -139,9 +141,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " #################### NERDCommenter ####################
 
-:map <C-c> <plug>NERDCommenterToggle
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
+" :map <C-c> <plug>NERDCommenterToggle
+" " Add spaces after comment delimiters by default
+" let g:NERDSpaceDelims = 1
 
 " #################### Fuzzy Finder ####################
 
@@ -341,3 +343,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " endif
 set cmdheight=1
 " autocmd BufRead,BufNewFile *.vue setfiletype html
+"
+"
+
+nmap <F8> :TagbarToggle<CR>
