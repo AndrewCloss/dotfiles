@@ -38,6 +38,7 @@ Plug 'christoomey/vim-tmux-navigator'
 " Plug 'narajaon/onestatus'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
+Plug 'justinmk/vim-sneak'
 
 call plug#end()
 
@@ -351,3 +352,17 @@ nmap <F8> :TagbarToggle<CR>
 
 
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
+
+
+" Erase gutter color, set sign background and foregrounds
+highlight! link SignColumn LineNr
+let g:gitgutter_set_sign_backgrounds = 1
+highlight GitGutterAdd    guifg=#009900 ctermfg=2
+highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+" highlight clear SignColumn
+" autocmd ColorScheme * highlight! link SignColumn LineNr
+
+" Erase line number color
+highlight clear CursorLineNR
