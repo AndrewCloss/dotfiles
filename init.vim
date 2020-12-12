@@ -28,7 +28,7 @@ Plug 'noahfrederick/vim-laravel'
 Plug 'jwalton512/vim-blade'
 " other
 " Plug 'preservim/nerdcommenter'
-Plug 'yuttie/comfortable-motion.vim'
+" Plug 'yuttie/comfortable-motion.vim'
 Plug 'tpope/vim-projectionist'        
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'tpope/vim-surround'
@@ -39,6 +39,10 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-sneak'
+Plug 'psliwka/vim-smoothie'
+Plug 'reedes/vim-wheel'
+Plug 'pineapplegiant/spaceduck'
+Plug 'aonemd/kuroi.vim'
 
 call plug#end()
 
@@ -47,8 +51,8 @@ call plug#end()
 
 set relativenumber
 set nu rnu                      " hybrid line numbers
-set scrolloff=999               " always keep cursor at the middle of screen
-set virtualedit=onemore         " allow the cursor to move just past the end of the line
+" set scrolloff=999               " always keep cursor at the middle of screen
+" set virtualedit=onemore         " allow the cursor to move just past the end of the line
 set undolevels=5000             " set maximum undo levels
 set undofile                    " preserves undo history per file, through closing and opening
 " set spell                     " spell checking
@@ -81,6 +85,7 @@ set ttimeoutlen=10
 " =============================================================================
 
 colorscheme gruvbox
+" colorscheme kuroi
 " colorscheme toast
 " colorscheme monokai
 " colorscheme dracula
@@ -162,10 +167,14 @@ let g:fzf_action = {
       \ }
 
 " #################### Miscellaneous mapping ####################
+let g:wheel#map#up   = '<c-k>'
+let g:wheel#map#down = '<c-j>'
+ " let g:wheel#line#threshold = 20      " lines from start or end
+" let g:wheel#scroll_on_wrap = 0      " 0=disable, 1=enable (default)
 
 " Use ctrl-[hjkl] to select the active split!
-nmap <silent> <c-k> :wincmd k<CR>
-nmap <silent> <c-j> :wincmd j<CR>
+" nmap <silent> <c-k> :wincmd k<CR>
+" nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
@@ -358,11 +367,22 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
 " Erase gutter color, set sign background and foregrounds
 highlight! link SignColumn LineNr
 let g:gitgutter_set_sign_backgrounds = 1
-highlight GitGutterAdd    guifg=#009900 ctermfg=2
-highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+highlight GitGutterAdd    guifg=#b8bb26 ctermfg=2
+highlight GitGutterChange guifg=#fabd2f ctermfg=3
 highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 " highlight clear SignColumn
 " autocmd ColorScheme * highlight! link SignColumn LineNr
 
 " Erase line number color
 highlight clear CursorLineNR
+
+
+" if exists('+termguicolors')
+"   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"   set termguicolors
+" endif
+
+" colorscheme spaceduck
+
+" let g:airline_theme = 'spaceduck'
