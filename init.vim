@@ -8,9 +8,14 @@ Plug 'morhetz/gruvbox'
 Plug 'crusoexia/vim-monokai'
 Plug 'jsit/toast.vim/'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'pineapplegiant/spaceduck'
+Plug 'aonemd/kuroi.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " navigation
+Plug 'justinmk/vim-sneak'
+Plug 'psliwka/vim-smoothie'
+Plug 'reedes/vim-wheel'
 Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -19,16 +24,14 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'vimwiki/vimwiki'
-Plug 'tpope/vim-dispatch'             
 " languages
 Plug 'storyn26383/vim-vue'
 Plug 'noahfrederick/vim-composer'     
 Plug 'noahfrederick/vim-laravel'
 Plug 'jwalton512/vim-blade'
 " other
-" Plug 'preservim/nerdcommenter'
-" Plug 'yuttie/comfortable-motion.vim'
+Plug 'vimwiki/vimwiki'
+Plug 'tpope/vim-dispatch'             
 Plug 'tpope/vim-projectionist'        
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'tpope/vim-surround'
@@ -38,11 +41,7 @@ Plug 'christoomey/vim-tmux-navigator'
 " Plug 'narajaon/onestatus'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
-Plug 'justinmk/vim-sneak'
-Plug 'psliwka/vim-smoothie'
-Plug 'reedes/vim-wheel'
-Plug 'pineapplegiant/spaceduck'
-Plug 'aonemd/kuroi.vim'
+Plug 'tpope/vim-repeat'
 
 call plug#end()
 
@@ -158,10 +157,11 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " nnoremap <c-p> :GFiles<cr>
 nnoremap <c-p> :Files<cr>
 
-let g:fzf_preview_window = 'right:60%' " enable preview window on the right with 60% width
-let g:fzf_layout = { 'down': '~40%' } " display from bottom
+" let g:fzf_preview_window = 'right:60%' " enable preview window on the right with 60% width
+" let g:fzf_layout = { 'down': '~40%' } " display from bottom
 
 let g:fzf_action = {
+      \ 'ctrl-t': 'tab split',
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit'
       \ }
@@ -376,13 +376,3 @@ highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 " Erase line number color
 highlight clear CursorLineNR
 
-
-" if exists('+termguicolors')
-"   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-"   set termguicolors
-" endif
-
-" colorscheme spaceduck
-
-" let g:airline_theme = 'spaceduck'
