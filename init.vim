@@ -2,14 +2,15 @@
 " =============================================================================
 
 call plug#begin('~/.config/nvim/plugged')
-
 " themes
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
+Plug 'arcticicestudio/nord-vim'
 Plug 'crusoexia/vim-monokai'
 Plug 'jsit/toast.vim/'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'pineapplegiant/spaceduck'
 Plug 'aonemd/kuroi.vim'
+Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " navigation
@@ -25,33 +26,51 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 " languages
-Plug 'storyn26383/vim-vue'
+" Plug 'storyn26383/vim-vue'
+Plug 'leafOfTree/vim-vue-plugin'
 Plug 'noahfrederick/vim-composer'     
 Plug 'noahfrederick/vim-laravel'
 Plug 'jwalton512/vim-blade'
 " other
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-dispatch'             
 Plug 'tpope/vim-projectionist'        
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'tpope/vim-surround'
 " Plug 'tmux-plugins/vim-tmux'
 Plug 'christoomey/vim-tmux-navigator'
-" Plug 'edkolev/tmuxline.vim'
-" Plug 'narajaon/onestatus'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
-
+Plug 'justinmk/vim-sneak'
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'aonemd/kuroi.vim'
+Plug 'christianchiarulli/nvcode-color-schemes.vim'
+Plug 'senran101604/neotrix.vim'
+Plug 'mhinz/vim-startify'
+" Plug 'wfxr/minimap.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'kassio/neoterm'
+Plug 'liuchengxu/vista.vim'
 call plug#end()
 
 " General
 " =============================================================================
+let g:vista#renderer#enable_icon = 1
+let g:vista_icon_indent = ["▸ ", ""]
+let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
 
+set nofixendofline
+" autocmd BufRead,BufNewFile *.vue setfiletype js
+" autocmd BufRead,BufNewFile *.vue setfiletype html
 set relativenumber
 set nu rnu                      " hybrid line numbers
-" set scrolloff=999               " always keep cursor at the middle of screen
-" set virtualedit=onemore         " allow the cursor to move just past the end of the line
+set scrolloff=5                 " always display 5 lines around cursor
+" set scrolloff=999             " always keep cursor at the middle of screen
+" set virtualedit=onemore       " allow the cursor to move just past the end of the line
 set undolevels=5000             " set maximum undo levels
 set undofile                    " preserves undo history per file, through closing and opening
 " set spell                     " spell checking
@@ -80,28 +99,82 @@ set foldnestmax=10
 set nofoldenable
 set foldlevel=2
 set ttimeoutlen=10
+set cursorline
+set hidden
+set cmdheight=1
+set noshowmode noruler
+set laststatus=0
+
+" Keybindings
+" =============================================================================
+let mapleader = " " " space as leader key
+nnoremap <leader>v :e $MYVIMRC<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>f :Prettier<CR>
+nnoremap <leader>m :Goyo<CR>
+" maintain visual selection of indentation blocks
+vmap < <gv
+vmap > >gv
+" map to open NERDTree with a specific key
+map <C-n> :NERDTreeToggle<CR>
+
+" kassio/neoterm
+let g:neoterm_default_mod = 'vertical'
+let g:neoterm_size = 100
+let g:neoterm_autoinsert = 1
+let g:neoterm_autoscroll = 1
+let g:neoterm_term_per_tab = 1
+let g:neoterm_keep_term_open = 0
+nnoremap <c-q> :Ttoggle<CR>
+inoremap <c-q> <Esc>:Ttoggle<CR>
+tnoremap <c-q> <c-\><c-n>:Ttoggle<CR>
+
+let g:goyo_width=120
+
 " Theme
 " =============================================================================
-
+set termguicolors                   " 24-bit colors
+" colorscheme nord
+" colorscheme onedark
 colorscheme gruvbox
 " colorscheme kuroi
 " colorscheme toast
 " colorscheme monokai
 " colorscheme dracula
+" colorscheme neotrix
 
-let g:gruvbox_italic=1              " italics are disabled by default
-" let g:gruvbox_contrast_dark='hard'  " high contrast version of dark theme
-set termguicolors                   " 24-bit colors
+" let g:gruvbox_italic=1              " italics are disabled by default
+" let g:gruvbox_contrast_dark='medium'  " high contrast version of dark theme
 " set background=dark
 " autocmd vimenter * colorscheme gruvbox
 " syntax on
 
+let g:vim_vue_plugin_load_full_syntax = 1
+let g:vim_vue_plugin_highlight_vue_attr = 1
+let g:vim_vue_plugin_highlight_vue_keyword = 1
+
 " status bar
 " let g:airline_theme = 'powerlineish'
-let g:airline_theme = 'murmur'
+" let g:airline_theme = 'murmur'
+" let g:airline_theme = 'monokai'
+" let g:airline_theme = 'dracula'
+" let g:airline_theme = 'onedark'
+let g:airline_theme = 'gruvbox'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'jsformatter'
+let g:airline#extensions#tabline#show_close_button = 0 " remove 'X' at the end of the tabline                                            
+let g:airline#extensions#tabline#tabs_label = ''       " can put text here like BUFFERS to denote buffers (I clear it so nothing is shown)
+let g:airline#extensions#tabline#buffers_label = ''    " can put text here like TABS to denote tabs (I clear it so nothing is shown)      
+let g:airline#extensions#tabline#fnamemod = ':t'       " disable file paths in the tab                                                    
+let g:airline#extensions#tabline#show_tab_count = 0    " dont show tab numbers on the right                                                           
+let g:airline#extensions#tabline#show_buffers = 0      " dont show buffers in the tabline                                                 
+" let g:airline#extensions#tabline#tab_min_count = 2     " minimum of 2 tabs needed to display the tabline                                  
+let g:airline#extensions#tabline#show_splits = 0       " disables the buffer name that displays on the right of the tabline               
+let g:airline#extensions#tabline#show_tab_nr = 0       " disable tab numbers                                                              
+let g:airline#extensions#tabline#show_tab_type = 0     " disables the weird ornage arrow on the tabline
 " let g:airline_detect_spelllang=0
 " let g:airline_detect_spell=0
-let g:airline_extensions = ['coc', 'fugitiveline', 'branch', 'term']
+let g:airline_extensions = ['coc', 'fugitiveline', 'branch', 'term', 'tabline']
 let g:airline_powerline_fonts = 1
 " let g:airline_section_z = '%p%% %#__accent_bold#%{g:airline_symbols.linenr}%l%#__restore__#%#__accent_bold#/%L%{g:airline_symbols.maxlinenr}%#__restore__#:%v'
 " let g:airline_section_z = airline#section#create(['linenr'])
@@ -121,18 +194,16 @@ let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 " =============================================================================
 
 " set nocompatible
-filetype plugin on
-syntax on
-" let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+" filetype plugin on
+" syntax on
+" " let g:vimwiki_list = [{'path': '~/vimwiki/',
+"                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
-hi Normal guibg=NONE ctermbg=NONE
+" hi Normal guibg=NONE ctermbg=NONE
 
 " NERDTree
 " =============================================================================
 
-" map to open NERDTree with a specific key
-map <C-n> :NERDTreeToggle<CR>
 
 " close vim if only NERDTree is left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -167,17 +238,17 @@ let g:fzf_action = {
       \ }
 
 " #################### Miscellaneous mapping ####################
-let g:wheel#map#up   = '<c-k>'
-let g:wheel#map#down = '<c-j>'
- " let g:wheel#line#threshold = 20      " lines from start or end
-" let g:wheel#scroll_on_wrap = 0      " 0=disable, 1=enable (default)
-
 " Use ctrl-[hjkl] to select the active split!
 " nmap <silent> <c-k> :wincmd k<CR>
 " nmap <silent> <c-j> :wincmd j<CR>
-nmap <silent> <c-h> :wincmd h<CR>
-nmap <silent> <c-l> :wincmd l<CR>
-
+" nmap <silent> <c-h> :wincmd h<CR>
+" nmap <silent> <c-l> :wincmd l<CR>
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+"
 " Prevent x from overriding what's in the clipboard
 noremap x "_x
 noremap X "_X
@@ -190,14 +261,10 @@ inoremap <C-S> <Esc>:update<cr>gi
 " #################### COC ####################
 
 " TextEdit might fail if hidden is not set.
-set hidden
 
 " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
-
-" Give more space for displaying messages.
-" set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -349,20 +416,10 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " if !empty($TMUX)
     " au BufEnter * :OneStatus
-    set noshowmode noruler
-    set laststatus=0
 " endif
-set cmdheight=1
 " autocmd BufRead,BufNewFile *.vue setfiletype html
-"
-"
-
-nmap <F8> :TagbarToggle<CR>
-
 
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-
-
 
 " Erase gutter color, set sign background and foregrounds
 highlight! link SignColumn LineNr
@@ -374,5 +431,8 @@ highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 " autocmd ColorScheme * highlight! link SignColumn LineNr
 
 " Erase line number color
-highlight clear CursorLineNR
+" highlight clear CursorLineNR
 
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+autocmd BufEnter * :syntax sync fromstart
