@@ -113,10 +113,14 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>f :Prettier<CR>
 nnoremap <leader>m :Goyo<CR>
 " maintain visual selection of indentation blocks
-vmap < <gv
-vmap > >gv
+" vmap < <gv
+" vmap > >gv
 " map to open NERDTree with a specific key
 map <C-n> :NERDTreeToggle<CR>
+" nnoremap <A-d> <C-y>
+" nnoremap <A-u> <C-e>
+" nnoremap <C-y> <A-k>
+" nnoremap <C-e> <A-j>
 
 " kassio/neoterm
 let g:neoterm_default_mod = 'vertical'
@@ -245,18 +249,18 @@ let g:fzf_action = {
 " nmap <silent> <c-l> :wincmd l<CR>
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+" nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+" nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
-"
+
 " Prevent x from overriding what's in the clipboard
 noremap x "_x
 noremap X "_X
 
 " Rebind save to ctrl-s, allow saving in insert and visual
-noremap <C-S> :update<cr>
-vnoremap <C-S> <C-C>:update<CR>
-inoremap <C-S> <Esc>:update<cr>gi
+" noremap <C-S> :update<cr>
+" vnoremap <C-S> <C-C>:update<CR>
+" inoremap <C-S> <Esc>:update<cr>gi
 
 " #################### COC ####################
 
