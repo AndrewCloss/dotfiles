@@ -17,14 +17,14 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'justinmk/vim-sneak'
 Plug 'psliwka/vim-smoothie'
 Plug 'reedes/vim-wheel'
-Plug 'preservim/nerdtree'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'francoiscabrol/ranger.vim'
 " autocomplete, linting
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+" Plug 'mhinz/vim-signify'
 " languages
 " Plug 'storyn26383/vim-vue'
 Plug 'leafOfTree/vim-vue-plugin'
@@ -51,7 +51,11 @@ Plug 'mhinz/vim-startify'
 " Plug 'wfxr/minimap.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'kassio/neoterm'
-Plug 'liuchengxu/vista.vim'
+" Plug 'liuchengxu/vista.vim'
+" navigation
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
 " General
@@ -69,13 +73,11 @@ set nofixendofline
 set relativenumber
 set nu rnu                      " hybrid line numbers
 set scrolloff=5                 " always display 5 lines around cursor
-" set scrolloff=999             " always keep cursor at the middle of screen
-" set virtualedit=onemore       " allow the cursor to move just past the end of the line
 set undolevels=5000             " set maximum undo levels
 set undofile                    " preserves undo history per file, through closing and opening
 " set spell                     " spell checking
 set diffopt=filler,vertical     " default behavior for diff
-"set nowrap                     " disable wrap for long lines
+set nowrap                     " disable wrap for long lines
 "set textwidth=0                " disable auto break long lines
 set hlsearch incsearch          " turns on highlighting search results and searching as you type.
 set linebreak showbreak=⏎\      " all of this just tweaks how lines are shown when they wrap.
@@ -104,6 +106,7 @@ set hidden
 set cmdheight=1
 set noshowmode noruler
 set laststatus=0
+highlight clear CursorLineNR " erase line number color
 
 " Keybindings
 " =============================================================================
@@ -115,19 +118,29 @@ nnoremap <leader>m :Goyo<CR>
 " maintain visual selection of indentation blocks
 " vmap < <gv
 " vmap > >gv
-" map to open NERDTree with a specific key
-map <C-n> :NERDTreeToggle<CR>
 " nnoremap <A-d> <C-y>
 " nnoremap <A-u> <C-e>
 " nnoremap <C-y> <A-k>
 " nnoremap <C-e> <A-j>
+
+" Find files using Telescope command-line sugar.
+" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+" nnoremap <leader>fb <cmd>Telescope buffers<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Using lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 " kassio/neoterm
 let g:neoterm_default_mod = 'vertical'
 let g:neoterm_size = 100
 let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
-let g:neoterm_term_per_tab = 1
+let g:neoterm_term_per_tab = 0
 let g:neoterm_keep_term_open = 0
 nnoremap <c-q> :Ttoggle<CR>
 inoremap <c-q> <Esc>:Ttoggle<CR>
@@ -135,34 +148,27 @@ tnoremap <c-q> <c-\><c-n>:Ttoggle<CR>
 
 let g:goyo_width=120
 
-" Theme
-" =============================================================================
-set termguicolors                   " 24-bit colors
-" colorscheme nord
-" colorscheme onedark
-colorscheme gruvbox
-" colorscheme kuroi
-" colorscheme toast
-" colorscheme monokai
-" colorscheme dracula
-" colorscheme neotrix
+" mhinz/vim-startify
+let g:startify_change_to_dir = 0
+let g:startify_change_to_vcs_root = 1
 
-" let g:gruvbox_italic=1              " italics are disabled by default
-" let g:gruvbox_contrast_dark='medium'  " high contrast version of dark theme
-" set background=dark
-" autocmd vimenter * colorscheme gruvbox
-" syntax on
+set termguicolors                   " 24-bit colors
+
+" gruvbox-community/gruvbox
+let g:gruvbox_contrast_dark = 'hard'
+if ('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+end
+let g:gruvbox_invert_selection='0'
+colorscheme gruvbox
+set background=dark
 
 let g:vim_vue_plugin_load_full_syntax = 1
 let g:vim_vue_plugin_highlight_vue_attr = 1
 let g:vim_vue_plugin_highlight_vue_keyword = 1
 
 " status bar
-" let g:airline_theme = 'powerlineish'
-" let g:airline_theme = 'murmur'
-" let g:airline_theme = 'monokai'
-" let g:airline_theme = 'dracula'
-" let g:airline_theme = 'onedark'
 let g:airline_theme = 'gruvbox'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'jsformatter'
@@ -194,53 +200,6 @@ let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 " highlight LineNr     ctermbg=NONE guibg=NONE
 " highlight SignColumn ctermbg=NONE guibg=NONE
 
-" VimWiki
-" =============================================================================
-
-" set nocompatible
-" filetype plugin on
-" syntax on
-" " let g:vimwiki_list = [{'path': '~/vimwiki/',
-"                       \ 'syntax': 'markdown', 'ext': '.md'}]
-
-" hi Normal guibg=NONE ctermbg=NONE
-
-" NERDTree
-" =============================================================================
-
-
-" close vim if only NERDTree is left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" open NERDTree on startup if no files were specified
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" open NERDTree on startup if a directory was specified
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-
-" #################### NERDCommenter ####################
-
-" :map <C-c> <plug>NERDCommenterToggle
-" " Add spaces after comment delimiters by default
-" let g:NERDSpaceDelims = 1
-
-" #################### Fuzzy Finder ####################
-
-" use .gitignore
-" nnoremap <c-p> :GFiles<cr>
-nnoremap <c-p> :Files<cr>
-
-" let g:fzf_preview_window = 'right:60%' " enable preview window on the right with 60% width
-" let g:fzf_layout = { 'down': '~40%' } " display from bottom
-
-let g:fzf_action = {
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-s': 'split',
-      \ 'ctrl-v': 'vsplit'
-      \ }
-
 " #################### Miscellaneous mapping ####################
 " Use ctrl-[hjkl] to select the active split!
 " nmap <silent> <c-k> :wincmd k<CR>
@@ -249,8 +208,8 @@ let g:fzf_action = {
 " nmap <silent> <c-l> :wincmd l<CR>
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
-" nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
-" nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 
 " Prevent x from overriding what's in the clipboard
@@ -423,7 +382,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " endif
 " autocmd BufRead,BufNewFile *.vue setfiletype html
 
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+" command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " Erase gutter color, set sign background and foregrounds
 highlight! link SignColumn LineNr
@@ -431,12 +390,30 @@ let g:gitgutter_set_sign_backgrounds = 1
 highlight GitGutterAdd    guifg=#b8bb26 ctermfg=2
 highlight GitGutterChange guifg=#fabd2f ctermfg=3
 highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+
 " highlight clear SignColumn
 " autocmd ColorScheme * highlight! link SignColumn LineNr
 
-" Erase line number color
-" highlight clear CursorLineNR
-
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-autocmd BufEnter * :syntax sync fromstart
+" nvim-telescope/telescope.nvim
+lua << EOF
+local actions = require('telescope.actions')
+-- Global remapping
+------------------------------
+require('telescope').setup{
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+      },
+    },
+  }
+}
+EOF
+
+" francoiscabrol/ranger.vim
+let g:ranger_map_keys = 0
+map <leader>p :RangerCurrentFileExistingOrNewTab<CR>
+let g:ranger_replace_netrw = 1
