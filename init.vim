@@ -51,7 +51,7 @@ Plug 'mhinz/vim-startify'
 " Plug 'wfxr/minimap.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'kassio/neoterm'
-" Plug 'liuchengxu/vista.vim'
+Plug 'liuchengxu/vista.vim'
 " navigation
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -68,8 +68,6 @@ let g:vista#renderer#icons = {
 \  }
 
 set nofixendofline
-" autocmd BufRead,BufNewFile *.vue setfiletype js
-" autocmd BufRead,BufNewFile *.vue setfiletype html
 set relativenumber
 set nu rnu                      " hybrid line numbers
 set scrolloff=5                 " always display 5 lines around cursor
@@ -77,12 +75,12 @@ set undolevels=5000             " set maximum undo levels
 set undofile                    " preserves undo history per file, through closing and opening
 " set spell                     " spell checking
 set diffopt=filler,vertical     " default behavior for diff
-set nowrap                     " disable wrap for long lines
+" set nowrap                     " disable wrap for long lines
 "set textwidth=0                " disable auto break long lines
 set hlsearch incsearch          " turns on highlighting search results and searching as you type.
 set linebreak showbreak=⏎\      " all of this just tweaks how lines are shown when they wrap.
 set formatoptions+=nj
-let g:PHP_outdentphpescape = 0  " means that PHP tags will match the indent of the HTML around them
+" let g:PHP_outdentphpescape = 0  " means that PHP tags will match the indent of the HTML around them
 " tabs
 set expandtab     " replace <Tab with spaces
 set tabstop=2     " number of spaces that a <Tab> in the file counts for
@@ -96,16 +94,16 @@ set gdefault   " when on, the :substitute flag 'g' is default on
 " clipboard
 set clipboard=unnamedplus " use with neovim to sync system clipboard
 " fold manually by indent level
-set foldmethod=indent   
-set foldnestmax=10
-set nofoldenable
-set foldlevel=2
+" set foldmethod=indent   
+" set foldnestmax=10
+" set nofoldenable
+" set foldlevel=2
 set ttimeoutlen=10
 set cursorline
 set hidden
 set cmdheight=1
 set noshowmode noruler
-set laststatus=0
+set laststatus=2
 highlight clear CursorLineNR " erase line number color
 
 " Keybindings
@@ -115,19 +113,6 @@ nnoremap <leader>v :e $MYVIMRC<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>f :Prettier<CR>
 nnoremap <leader>m :Goyo<CR>
-" maintain visual selection of indentation blocks
-" vmap < <gv
-" vmap > >gv
-" nnoremap <A-d> <C-y>
-" nnoremap <A-u> <C-e>
-" nnoremap <C-y> <A-k>
-" nnoremap <C-e> <A-j>
-
-" Find files using Telescope command-line sugar.
-" nnoremap <leader>ff <cmd>Telescope find_files<cr>
-" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-" nnoremap <leader>fb <cmd>Telescope buffers<cr>
-" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " Using lua functions
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
