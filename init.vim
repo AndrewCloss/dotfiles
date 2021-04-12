@@ -2,6 +2,7 @@
 " =============================================================================
 
 call plug#begin('~/.config/nvim/plugged')
+Plug 'neovim/nvim-lspconfig'
 " themes
 Plug 'gruvbox-community/gruvbox'
 Plug 'arcticicestudio/nord-vim'
@@ -57,6 +58,16 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
+
+" nvim-lspconfig
+lua << EOF
+require'lspconfig'.vuels.setup{}
+require'lspconfig'.intelephense.setup{}
+require'lspconfig'.jsonls.setup{}
+EOF
+
+" This line enables the true color support.
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " General
 " =============================================================================
