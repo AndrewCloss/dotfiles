@@ -58,6 +58,8 @@ function greet {
 
 greet
 
-alias vim="nvim"
+alias vim="~/nvim.appimage"
+alias nvim="~/nvim.appimage"
 alias nvimconfig="nvim $MYVIMRC"
 alias vimconfig="nvim $MYVIMRC"
+export TERM=xterm-256color
