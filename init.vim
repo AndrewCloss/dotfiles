@@ -5,13 +5,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'neovim/nvim-lspconfig'
 " themes
 Plug 'gruvbox-community/gruvbox'
-Plug 'arcticicestudio/nord-vim'
-Plug 'crusoexia/vim-monokai'
-Plug 'jsit/toast.vim/'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'pineapplegiant/spaceduck'
-Plug 'aonemd/kuroi.vim'
-Plug 'joshdick/onedark.vim'
 " navigation
 Plug 'justinmk/vim-sneak'
 Plug 'psliwka/vim-smoothie'

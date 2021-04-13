@@ -1,4 +1,5 @@
-# Created by newuser for 5.8
+# # Created by newuser for 5.8
+fpath=($fpath "/home/developer/.zfunctions")
 autoload -U promptinit; promptinit
 prompt spaceship
 
@@ -58,8 +59,18 @@ function greet {
 
 greet
 
-alias vim="~/nvim.appimage"
-alias nvim="~/nvim.appimage"
+# alias vim="~/nvim.appimage"
+# alias nvim="~/nvim.appimage"
 alias nvimconfig="nvim $MYVIMRC"
 alias vimconfig="nvim $MYVIMRC"
-export TERM=xterm-256color
+# export TERM=xterm-256color
+# fpath=($fpath "/home/developer/.zfunctions")
+
+alias nvim='/usr/local/bin/nvim.appimage'
+alias sudo='sudo '
+alias vim='nvim'
+alias pa='php artisan'
+alias nvimconfig='nvim ~/personal/dotfiles/init.vim'
+
+export VISUAL=vim
+export EDITOR="$VISUAL"
