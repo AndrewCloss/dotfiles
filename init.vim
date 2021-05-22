@@ -2,7 +2,6 @@
 " =============================================================================
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'neovim/nvim-lspconfig'
 " themes
 Plug 'gruvbox-community/gruvbox'
 Plug 'ghifarit53/tokyonight-vim'
@@ -16,7 +15,7 @@ Plug 'francoiscabrol/ranger.vim'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " git
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 " languages
 " Plug 'storyn26383/vim-vue'
 Plug 'leafOfTree/vim-vue-plugin'
@@ -46,14 +45,19 @@ Plug 'liuchengxu/vista.vim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'Yggdroot/indentLine'
 Plug 'itchyny/lightline.vim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
+
+Plug 'lewis6991/gitsigns.nvim'
 call plug#end()
 
 " General
 " =============================================================================
+
+lua require('config')
 
 set nofixendofline
 set relativenumber
@@ -68,7 +72,6 @@ set diffopt=filler,vertical     " default behavior for diff
 set hlsearch incsearch          " turns on highlighting search results and searching as you type.
 set linebreak showbreak=⏎\      " all of this just tweaks how lines are shown when they wrap.
 set formatoptions+=nj
-" let g:PHP_outdentphpescape = 0  " means that PHP tags will match the indent of the HTML around them
 " tabs
 set expandtab     " replace <Tab with spaces
 set tabstop=2     " number of spaces that a <Tab> in the file counts for
@@ -98,6 +101,9 @@ set laststatus=2
 " Keybindings
 " =============================================================================
 
+nmap ]r :!npm run repl %:p<cr>
+" nmap ]rr :!npm run repl autocmd TermEnter,BufEnter,WinEnter <buffer> call setreg("t", trim(@*) . "^M")<cr>
+
 let mapleader = " " " space as leader key
 nnoremap <leader>v :e $MYVIMRC<CR>
 nnoremap <leader>w :w<CR>
@@ -109,8 +115,8 @@ nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
+" nmap ]h <Plug>(GitGutterNextHunk)
+" nmap [h <Plug>(GitGutterPrevHunk)
 
 " liuchengxu/vista.vim
 " let g:vista#renderer#enable_icon = 1
@@ -121,12 +127,12 @@ nmap [h <Plug>(GitGutterPrevHunk)
 " \  }
 
 " kassio/neoterm
-let g:neoterm_default_mod = 'vertical'
-let g:neoterm_size = 100
-let g:neoterm_autoinsert = 1
-let g:neoterm_autoscroll = 1
-let g:neoterm_term_per_tab = 0
-let g:neoterm_keep_term_open = 0
+" let g:neoterm_default_mod = 'vertical'
+" let g:neoterm_size = 100
+" let g:neoterm_autoinsert = 1
+" let g:neoterm_autoscroll = 1
+" let g:neoterm_term_per_tab = 0
+" let g:neoterm_keep_term_open = 0
 nnoremap <c-q> :Ttoggle<CR>
 inoremap <c-q> <Esc>:Ttoggle<CR>
 tnoremap <c-q> <c-\><c-n>:Ttoggle<CR>
@@ -182,17 +188,20 @@ noremap X "_X
 " endif
 " autocmd BufRead,BufNewFile *.vue setfiletype html
 
-" command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+  " command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
+lua << EOF
+require('gitsigns').setup()
+EOF
 " Erase gutter color, set sign background and foregrounds
-highlight! link SignColumn LineNr
-" let g:gitgutter_set_sign_backgrounds = 1
-highlight GitGutterAdd    guifg=#b8bb26 ctermfg=2
-highlight GitGutterChange guifg=#fabd2f ctermfg=3
-highlight GitGutterDelete guifg=#ff2222 ctermfg=1
-let g:gitgutter_sign_added = '|'
-let g:gitgutter_sign_modified = '|'
-let g:gitgutter_sign_removed = '|'
+" highlight! link SignColumn LineNr
+" " let g:gitgutter_set_sign_backgrounds = 1
+" highlight GitGutterAdd    guifg=#b8bb26 ctermfg=2
+" highlight GitGutterChange guifg=#fabd2f ctermfg=3
+" highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+" let g:gitgutter_sign_added = '|'
+" let g:gitgutter_sign_modified = '|'
+" let g:gitgutter_sign_removed = '|'
 " Prettier
 " command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
@@ -218,8 +227,11 @@ let g:ranger_map_keys = 0
 map <leader>p :RangerCurrentFileExistingOrNewTab<CR>
 let g:ranger_replace_netrw = 1
 
-" Yggdroot/indentLine
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+" Yggdroot/indentLine, lukas-reineke/indent-blankline.nvim
+" let g:indentLine_char = '|'
+" let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+" nvim-telescope/telescope.nvim
+
 
 " itchyny/lightline.vim
 let g:lightline = {
@@ -237,74 +249,6 @@ let g:lightline = {
       \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
       \ }
 
-
-
-
-" nvim-lspconfig
-" lua << EOF
-" require'lspconfig'.tsserver.setup{}
-" require'lspconfig'.vuels.setup{}
-" require'lspconfig'.intelephense.setup{}
-" require'lspconfig'.jsonls.setup{}
-" EOF
-
-
-
-" jose-elias-alvarez/nvim-lsp-ts-utils
-" lua << EOF
-" local nvim_lsp = require("lspconfig")
-
-" nvim_lsp.tsserver.setup {
-"     on_attach = function(client, bufnr)
-"         local ts_utils = require("nvim-lsp-ts-utils")
-
-"         -- defaults
-"         ts_utils.setup {
-"             disable_commands = false,
-"             debug = false,
-"             enable_import_on_completion = false,
-"             import_on_completion_timeout = 5000,
-"             -- eslint
-"             eslint_bin = "eslint",
-"             eslint_args = {"-f", "json", "--stdin", "--stdin-filename", "$FILENAME"},
-"             eslint_enable_disable_comments = true,
-
-" 	    -- experimental settings!
-"             -- eslint diagnostics
-"             eslint_enable_diagnostics = false,
-"             eslint_diagnostics_debounce = 250,
-"             -- formatting
-"             enable_formatting = true,
-"             formatter = "prettier",
-"             formatter_args = {"--stdin-filepath", "$FILENAME"},
-"             format_on_save = false,
-"             no_save_after_format = false,
-"             -- parentheses completion
-"             complete_parens = false,
-"             signature_help_in_parens = false,
-"         }
-
-"         -- required to enable ESLint code actions and formatting
-"         ts_utils.setup_client(client)
-
-"         -- no default maps, so you may want to define some here
-" --        vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", {silent = true})
-"  --       vim.api.nvim_buf_set_keymap(bufnr, "n", "qq", ":TSLspFixCurrent<CR>", {silent = true})
-"   --      vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", {silent = true})
-"    --     vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", {silent = true})
-"     --    vim.api.nvim_buf_set_keymap(bufnr, "n", "gf", ":TSLspFormat<CR>", {silent = true})
-"     end
-" }
-" EOF
-
-" lua << EOF
-" vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-"     vim.lsp.diagnostic.on_publish_diagnostics, {
-"       -- Disable signs
-"       signs = false,
-"     }
-"   )
-" EOF
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
