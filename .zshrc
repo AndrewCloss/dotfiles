@@ -1,8 +1,16 @@
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 # # Created by newuser for 5.8
 fpath=($fpath "/home/developer/.zfunctions")
 autoload -U promptinit; promptinit
 prompt spaceship
 
+# SPACESHIP_CHAR_SYMBOL=☯
+# SPACESHIP_CHAR_SYMBOL=♞
+SPACESHIP_CHAR_SYMBOL=λ
+SPACESHIP_CHAR_SUFFIX=" "
 SPACESHIP_PROMPT_ORDER=(
   time          # Time stamps section
   # user          # Username section
@@ -72,5 +80,9 @@ alias vim='nvim'
 alias pa='php artisan'
 alias nvimconfig='nvim ~/personal/dotfiles/init.vim'
 
-export VISUAL=vim
+export VISUAL='/usr/local/bin/nvim.appimage'
 export EDITOR="$VISUAL"
+export GIT_EDITOR='/usr/local/bin/nvim.appimage'
+# export VISUAL=vim
+# export EDITOR="$VISUAL"
+# export GIT_EDITOR=vim

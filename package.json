@@ -18,6 +18,7 @@
   "homepage": "https://github.com/AndrewCloss/dotfiles#readme",
   "devDependencies": {
     "eslint": "^7.11.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-vue": "^7.0.1"
   },

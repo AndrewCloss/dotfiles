@@ -19,15 +19,15 @@ require('telescope').setup{
 }
 
 
-require("bufferline").setup{}
+-- require("bufferline").setup{}
 
 require("gitsigns").setup {
   signs = {
-    add          = {hl = 'GruvboxGreen'   , text = '│'},
-    change       = {hl = 'GruvboxYellow', text = '│'},
-    delete       = {hl = 'GruvboxRed', text = '_'},
-    topdelete    = {hl = 'GruvboxRed', text = '‾'},
-    changedelete = {hl = 'GruvboxYellow', text = '~'},
+    add          = {hl = 'Green'   , text = '│'},
+    change       = {hl = 'Yellow', text = '│'},
+    delete       = {hl = 'Red', text = '_'},
+    topdelete    = {hl = 'Red', text = '‾'},
+    changedelete = {hl = 'Yellow', text = '~'},
   },
     numhl = false,
     keymaps = {
@@ -49,3 +49,26 @@ require("gitsigns").setup {
     status_formatter = nil -- Use default
 }
 
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "vue", "javascript" }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  -- ignore_install = { "javascript" }, -- List of parsers to ignore installing
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    -- disable = { "c", "rust" },  -- list of language that will be disabled
+  },
+}
+
+require'nvim-web-devicons'.setup {
+   -- your personnal icons can go here (to override)
+   --  -- DevIcon will be appended to `name`
+  -- override = {
+  --   zsh = {
+  --     icon = "",
+  --     color = "#428850",
+  --     name = "Zsh"
+  --   }
+  -- };
+  -- globally enable default icons (default to false)
+  -- will get overriden by `get_icons` option
+  default = true;
+}

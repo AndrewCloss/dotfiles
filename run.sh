@@ -28,3 +28,7 @@ sudo make -j 20 install
 
 git config --global color.diff auto
 git config --global color.status auto
+
+
+# https://www.nerdfonts.com/font-downloads
+# "FiraCode Nerd Font"

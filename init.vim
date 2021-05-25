@@ -3,8 +3,8 @@
 
 call plug#begin('~/.config/nvim/plugged')
 " themes
-Plug 'gruvbox-community/gruvbox'
-Plug 'ghifarit53/tokyonight-vim'
+Plug 'sainnhe/gruvbox-material'
+" Plug 'ghifarit53/tokyonight-vim'
 " navigation
 Plug 'justinmk/vim-sneak'
 Plug 'psliwka/vim-smoothie'
@@ -12,13 +12,12 @@ Plug 'reedes/vim-wheel'
 Plug 'rbgrouleff/bclose.vim' " whats this for
 Plug 'francoiscabrol/ranger.vim'
 " autocomplete, linting
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " git
 Plug 'tpope/vim-fugitive'
 " Plug 'airblade/vim-gitgutter'
 " languages
 " Plug 'storyn26383/vim-vue'
-Plug 'leafOfTree/vim-vue-plugin'
+" Plug 'leafOfTree/vim-vue-plugin'
 Plug 'noahfrederick/vim-composer'     
 Plug 'noahfrederick/vim-laravel'
 Plug 'jwalton512/vim-blade'
@@ -44,15 +43,15 @@ Plug 'liuchengxu/vista.vim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-" Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " =============================================================================
 Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
-
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
-Plug 'akinsho/nvim-bufferline.lua'
+" Plug 'akinsho/nvim-bufferline.lua'
 call plug#end()
 
 " General
@@ -120,7 +119,6 @@ nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 let g:startify_change_to_dir = 0
 let g:startify_change_to_vcs_root = 1
 
-set termguicolors                   " 24-bit colors
 
 " gruvbox-community/gruvbox
 " let g:tokyonight_style = 'night' " available: night, storm
@@ -131,15 +129,22 @@ set termguicolors                   " 24-bit colors
 if ('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors                   " 24-bit colors
 end
-let g:gruvbox_invert_selection='0'
-colorscheme gruvbox
-set background=dark
+" let g:gruvbox_invert_selection='0'
+let g:gruvbox_material_palette = 'original'
+" let g:gruvbox_material_background = 'hard'
+colorscheme gruvbox-material
+" set background=dark
 highlight clear SignColumn
 
-let g:vim_vue_plugin_load_full_syntax = 1
-let g:vim_vue_plugin_highlight_vue_attr = 1
-let g:vim_vue_plugin_highlight_vue_keyword = 1
+hi CocErrorSign  ctermfg=Red guifg=#ff0000 guibg=none
+hi CocWarningSign  ctermfg=Brown guifg=#ff922b guibg=none
+hi CocInfoSign  ctermfg=Yellow guifg=#fab005 guibg=none
+
+" let g:vim_vue_plugin_load_full_syntax = 1
+" let g:vim_vue_plugin_highlight_vue_attr = 1
+" let g:vim_vue_plugin_highlight_vue_keyword = 1
 
 " #################### Miscellaneous mapping ####################
 " Use ctrl-[hjkl] to select the active split!
@@ -170,18 +175,6 @@ noremap X "_X
 
   " command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
-" Erase gutter color, set sign background and foregrounds
-" highlight! link SignColumn LineNr
-" " let g:gitgutter_set_sign_backgrounds = 1
-" highlight GitGutterAdd    guifg=#b8bb26 ctermfg=2
-" highlight GitGutterChange guifg=#fabd2f ctermfg=3
-" highlight GitGutterDelete guifg=#ff2222 ctermfg=1
-" let g:gitgutter_sign_added = '|'
-" let g:gitgutter_sign_modified = '|'
-" let g:gitgutter_sign_removed = '|'
-" Prettier
-" command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
 " francoiscabrol/ranger.vim
 let g:ranger_map_keys = 0
 map <leader>p :RangerCurrentFileExistingOrNewTab<CR>
@@ -195,7 +188,7 @@ let g:ranger_replace_netrw = 1
 
 " itchyny/lightline.vim
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'gruvbox_material',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
