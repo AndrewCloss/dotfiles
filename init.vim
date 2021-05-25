@@ -9,7 +9,7 @@ Plug 'ghifarit53/tokyonight-vim'
 Plug 'justinmk/vim-sneak'
 Plug 'psliwka/vim-smoothie'
 Plug 'reedes/vim-wheel'
-Plug 'rbgrouleff/bclose.vim'
+Plug 'rbgrouleff/bclose.vim' " whats this for
 Plug 'francoiscabrol/ranger.vim'
 " autocomplete, linting
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -39,24 +39,26 @@ Plug 'aonemd/kuroi.vim'
 Plug 'christianchiarulli/nvcode-color-schemes.vim'
 Plug 'senran101604/neotrix.vim'
 Plug 'mhinz/vim-startify'
-Plug 'kassio/neoterm'
 Plug 'liuchengxu/vista.vim'
 " navigation
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
+" =============================================================================
 Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
 
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+Plug 'akinsho/nvim-bufferline.lua'
 call plug#end()
 
 " General
 " =============================================================================
 
+set termguicolors
 lua require('config')
 
 set nofixendofline
@@ -102,7 +104,6 @@ set laststatus=2
 " =============================================================================
 
 nmap ]r :!npm run repl %:p<cr>
-" nmap ]rr :!npm run repl autocmd TermEnter,BufEnter,WinEnter <buffer> call setreg("t", trim(@*) . "^M")<cr>
 
 let mapleader = " " " space as leader key
 nnoremap <leader>v :e $MYVIMRC<CR>
@@ -114,28 +115,6 @@ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
-" nmap ]h <Plug>(GitGutterNextHunk)
-" nmap [h <Plug>(GitGutterPrevHunk)
-
-" liuchengxu/vista.vim
-" let g:vista#renderer#enable_icon = 1
-" let g:vista_icon_indent = ["▸ ", ""]
-" let g:vista#renderer#icons = {
-" \   "function": "\uf794",
-" \   "variable": "\uf71b",
-" \  }
-
-" kassio/neoterm
-" let g:neoterm_default_mod = 'vertical'
-" let g:neoterm_size = 100
-" let g:neoterm_autoinsert = 1
-" let g:neoterm_autoscroll = 1
-" let g:neoterm_term_per_tab = 0
-" let g:neoterm_keep_term_open = 0
-nnoremap <c-q> :Ttoggle<CR>
-inoremap <c-q> <Esc>:Ttoggle<CR>
-tnoremap <c-q> <c-\><c-n>:Ttoggle<CR>
 
 " mhinz/vim-startify
 let g:startify_change_to_dir = 0
@@ -156,6 +135,7 @@ end
 let g:gruvbox_invert_selection='0'
 colorscheme gruvbox
 set background=dark
+highlight clear SignColumn
 
 let g:vim_vue_plugin_load_full_syntax = 1
 let g:vim_vue_plugin_highlight_vue_attr = 1
@@ -190,9 +170,6 @@ noremap X "_X
 
   " command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
-lua << EOF
-require('gitsigns').setup()
-EOF
 " Erase gutter color, set sign background and foregrounds
 " highlight! link SignColumn LineNr
 " " let g:gitgutter_set_sign_backgrounds = 1
@@ -204,23 +181,6 @@ EOF
 " let g:gitgutter_sign_removed = '|'
 " Prettier
 " command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-" nvim-telescope/telescope.nvim
-lua << EOF
-local actions = require('telescope.actions')
--- Global remapping
-------------------------------
-require('telescope').setup{
-  defaults = {
-    mappings = {
-      i = {
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous,
-      },
-    },
-  }
-}
-EOF
 
 " francoiscabrol/ranger.vim
 let g:ranger_map_keys = 0
