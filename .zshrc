@@ -69,14 +69,14 @@ greet
 
 ZSH_CUSTOM=$HOME/.config/ohmyzsh/custom
 
-# alias vim="~/nvim.appimage"
-# alias nvim="~/nvim.appimage"
-alias nvimconfig="nvim $MYVIMRC"
-alias vimconfig="nvim $MYVIMRC"
+alias vim="$HOME/personal//nvim.appimage"
+alias nvim="$HOME/personal/nvim.appimage"
+#alias nvimconfig="nvim $MYVIMRC"
+#alias vimconfig="nvim $MYVIMRC"
 # export TERM=xterm-256color
 # fpath=($fpath "/home/developer/.zfunctions")
 
-alias nvim='/usr/local/bin/nvim.appimage'
+#alias nvim='/usr/local/bin/nvim.appimage'
 alias sudo='sudo '
 alias vim='nvim'
 alias pa='php artisan'
@@ -88,4 +88,4 @@ export GIT_EDITOR='/usr/local/bin/nvim.appimage'
 # export VISUAL=vim
 # export EDITOR="$VISUAL"
 # export GIT_EDITOR=vim
-nvm use 14.16.1
+#nvm use 14.16.1
