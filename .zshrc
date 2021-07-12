@@ -67,6 +67,8 @@ function greet {
 
 greet
 
+ZSH_CUSTOM=$HOME/.config/ohmyzsh/custom
+
 # alias vim="~/nvim.appimage"
 # alias nvim="~/nvim.appimage"
 alias nvimconfig="nvim $MYVIMRC"
