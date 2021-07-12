@@ -8,11 +8,11 @@ sudo yum -y install ncurses-devel
 sudo yum update -y
 sudo yum install -y ncurses-devel git make gcc autoconf man yodl
 git clone -b zsh-5.7.1 https://github.com/zsh-users/zsh.git /tmp/zsh
-#cd /tmp/zsh
-./tmp/zsh/Util/preconfig
-./tmp/zsh/configure
+cd /tmp/zsh
+./Util/preconfig
+./configure
 sudo make -j 20 install
-#cd ../
+cd $HOME/personal/dotfiles
 rm -rf /tmp/zsh
 
 # install nvim
@@ -23,7 +23,7 @@ mv nvim.appimage ~/personal
 # install prompt
 npm install -g spaceship-prompt
 rm $HOME/.zshrc
-ln -s .zshrc $HOME/
+ln -s $HOME/personal/dotfiles/.zshrc $HOME/
 
 # git colors
 git config --global color.diff auto
