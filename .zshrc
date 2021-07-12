@@ -86,3 +86,4 @@ export GIT_EDITOR='/usr/local/bin/nvim.appimage'
 # export VISUAL=vim
 # export EDITOR="$VISUAL"
 # export GIT_EDITOR=vim
+nvm use 14.16.1

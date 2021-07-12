@@ -51,6 +51,7 @@ Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'akinsho/nvim-bufferline.lua'
 call plug#end()
 
@@ -103,6 +104,9 @@ set laststatus=2
 " =============================================================================
 
 nmap ]r :!npm run repl %:p<cr>
+nmap ]t :!npm run lint %:p<cr>
+nmap ]y :!npm run test %:p<cr>
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 let mapleader = " " " space as leader key
 nnoremap <leader>v :e $MYVIMRC<CR>
@@ -133,6 +137,9 @@ if ('+termguicolors')
 end
 " let g:gruvbox_invert_selection='0'
 let g:gruvbox_material_palette = 'original'
+let g:gruvbox_material_disable_italic_comment = 1
+let g:gruvbox_material_enable_bold = 0
+<
 " let g:gruvbox_material_background = 'hard'
 colorscheme gruvbox-material
 " set background=dark
