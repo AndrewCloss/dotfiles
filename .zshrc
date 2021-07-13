@@ -65,27 +65,21 @@ function greet {
   echo -e "\n"
 }
 
+clear
 greet
 
-ZSH_CUSTOM=$HOME/.config/ohmyzsh/custom
+#ZSH_CUSTOM=$HOME/.config/ohmyzsh/custom
 
 alias vim="$HOME/personal//nvim.appimage"
 alias nvim="$HOME/personal/nvim.appimage"
 #alias nvimconfig="nvim $MYVIMRC"
 #alias vimconfig="nvim $MYVIMRC"
-# export TERM=xterm-256color
-# fpath=($fpath "/home/developer/.zfunctions")
 
-#alias nvim='/usr/local/bin/nvim.appimage'
 alias sudo='sudo '
 alias vim='nvim'
 alias pa='php artisan'
-alias nvimconfig='nvim ~/personal/dotfiles/init.vim'
+alias nvimconfig='nvim $HOME/personal/dotfiles/init.vim'
 
-export VISUAL='/usr/local/bin/nvim.appimage'
-export EDITOR="$VISUAL"
-export GIT_EDITOR='/usr/local/bin/nvim.appimage'
-# export VISUAL=vim
-# export EDITOR="$VISUAL"
-# export GIT_EDITOR=vim
-#nvm use 14.16.1
+export VISUAL='$HOME/personal/nvim.appimage'
+export EDITOR='$HOME/personal/nvim.appimage'
+export GIT_EDITOR='$HOME/personal/nvim.appimage'
