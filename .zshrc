@@ -83,3 +83,7 @@ alias nvimconfig='nvim $HOME/personal/dotfiles/init.vim'
 export VISUAL='$HOME/personal/nvim.appimage'
 export EDITOR='$HOME/personal/nvim.appimage'
 export GIT_EDITOR='$HOME/personal/nvim.appimage'
+
+if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]]; then
+   tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
+fi

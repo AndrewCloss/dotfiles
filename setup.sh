@@ -54,7 +54,8 @@ git config --global user.email "andrew.closs2@ontario.ca"
 
 # tmux config
 ./tmux__CentOS__build_from_source.sh
-# ln -s $HOME/personal/dotfiles/.tmux.conf $HOME/.config/
+ln -s $HOME/personal/dotfiles/.tmux.conf $HOME
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # wget http://monkey.org/~provos/libevent-1.4.14b-stable.tar.gz
 # tar -zxf libevent-*.tar.gz
