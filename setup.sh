@@ -52,3 +52,18 @@ sudo chsh -s /usr/local/bin/zsh developer
 git config --global user.name "andrew"
 git config --global user.email "andrew.closs2@ontario.ca"
 
+# tmux config
+./tmux__CentOS__build_from_source.sh
+# ln -s $HOME/personal/dotfiles/.tmux.conf $HOME/.config/
+
+# wget http://monkey.org/~provos/libevent-1.4.14b-stable.tar.gz
+# tar -zxf libevent-*.tar.gz
+# cd libevent-*/
+# ./configure --prefix=/usr/bin/libevent --enable-shared
+# make && make install
+
+# tar -zxf tmux-*.tar.gz
+# cd tmux-*/
+# PKG_CONFIG_PATH=$HOME/local/lib/pkgconfig ./configure --prefix=$HOME/local
+# make && make install
+
