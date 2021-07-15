@@ -36,15 +36,6 @@ ln -s $HOME/personal/dotfiles/.zshrc $HOME/
 git config --global color.diff auto
 git config --global color.status auto
 
-# copy nvim config
-mkdir $HOME/.config/nvim
-ln -s $HOME/personal/dotfiles/init.vim $HOME/.config/nvim
-ln -s $HOME/personal/dotfiles/lua $HOME/.config/nvim/
-
-# vim-plugged (https://github.com/junegunn/vim-plug)
-# sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-#          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
 # change shell
 sudo chsh -s /usr/local/bin/zsh developer
 
@@ -52,7 +43,19 @@ sudo chsh -s /usr/local/bin/zsh developer
 git config --global user.name "andrew"
 git config --global user.email "andrew.closs2@ontario.ca"
 
+# vim-plugged (https://github.com/junegunn/vim-plug)
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+nvim -es -u init.vim -i NONE -c "PlugInstall" -c "qa"
+
+# copy nvim config
+mkdir $HOME/.config/nvim
+ln -s $HOME/personal/dotfiles/init.vim $HOME/.config/nvim
+ln -s $HOME/personal/dotfiles/lua $HOME/.config/nvim/
+
 # tmux config
 ./tmux__CentOS__build_from_source.sh
 ln -s $HOME/personal/dotfiles/.tmux.conf $HOME
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+echo '  ForwardX11 yes' | sudo tee -a /etc/ssh/ssh_config  > /dev/null

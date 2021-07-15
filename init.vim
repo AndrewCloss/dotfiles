@@ -1,12 +1,12 @@
 " Plugins
 " =============================================================================
 " Install vim-plug if not found
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-endif
+" if empty(glob('~/.vim/autoload/plug.vim'))
+"   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+"     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" endif
 
-" Run PlugInstall if there are missing plugins
+" " Run PlugInstall if there are missing plugins
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
@@ -57,7 +57,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " =============================================================================
-Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
