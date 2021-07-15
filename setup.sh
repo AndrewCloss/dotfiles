@@ -42,8 +42,8 @@ ln -s $HOME/personal/dotfiles/init.vim $HOME/.config/nvim
 ln -s $HOME/personal/dotfiles/lua $HOME/.config/nvim/
 
 # vim-plugged (https://github.com/junegunn/vim-plug)
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+# sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+#          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 # change shell
 sudo chsh -s /usr/local/bin/zsh developer
@@ -56,15 +56,3 @@ git config --global user.email "andrew.closs2@ontario.ca"
 ./tmux__CentOS__build_from_source.sh
 ln -s $HOME/personal/dotfiles/.tmux.conf $HOME
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-# wget http://monkey.org/~provos/libevent-1.4.14b-stable.tar.gz
-# tar -zxf libevent-*.tar.gz
-# cd libevent-*/
-# ./configure --prefix=/usr/bin/libevent --enable-shared
-# make && make install
-
-# tar -zxf tmux-*.tar.gz
-# cd tmux-*/
-# PKG_CONFIG_PATH=$HOME/local/lib/pkgconfig ./configure --prefix=$HOME/local
-# make && make install
-
