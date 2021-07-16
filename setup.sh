@@ -58,8 +58,9 @@ ln -s $HOME/personal/dotfiles/lua $HOME/.config/nvim/
 ln -s $HOME/personal/dotfiles/.tmux.conf $HOME
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-# echo '  ForwardX11 yes' | sudo tee -a /etc/ssh/ssh_config  > /dev/null
-sudo yum install xclip
+sudo yum install -y xclip xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps
 echo 'X11Forwarding yes
 X11DisplayOffset 10
 X11UseLocalhost no' | sudo tee -a /etc/ssh/sshd_config  > /dev/null
+# echo '  ForwardX11 yes' | sudo tee -a /etc/ssh/ssh_config  > /dev/null
+sudo service sshd restart
