@@ -46,7 +46,7 @@ git config --global user.email "andrew.closs2@ontario.ca"
 # vim-plugged (https://github.com/junegunn/vim-plug)
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-nvim -es -u init.vim -i NONE -c "PlugInstall" -c "qa"
+# nvim -es -u init.vim -i NONE -c "PlugInstall" -c "qa"
 
 # copy nvim config
 mkdir $HOME/.config/nvim
@@ -64,3 +64,4 @@ X11DisplayOffset 10
 X11UseLocalhost no' | sudo tee -a /etc/ssh/sshd_config  > /dev/null
 # echo '  ForwardX11 yes' | sudo tee -a /etc/ssh/ssh_config  > /dev/null
 sudo service sshd restart
+# exit
